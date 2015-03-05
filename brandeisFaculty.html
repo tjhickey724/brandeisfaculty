@@ -1,0 +1,51 @@
+<head>
+  <title>Brandeis Faculty 2014-2015</title>
+</head>
+
+<body>
+ <div class="container">
+	<div class="jumbotron">
+		  <h1> The Faculty of Brandeis University<br/> 2014-2015</h1>
+		<p>See how many faculty you know by sight!  Moving the mouse over their picture will pop up
+			their name.  Clicking on the "Hide Faculty Names" button below will hide all of the names!
+		</p>
+		<p>
+			The data this application is based on derive from Brandeis University, however the University makes no claim or representation as to the accuracy of the data as presented by this application.
+		</p>
+		<label class="hide-completed">
+			<input type="checkbox" checked="{{hideCompleted}}"/>
+			Hide Faculty Names
+		</label>
+	</div>
+  {{> hello}}
+</div>
+</body>
+
+<template name="hello">
+
+
+  {{#each facDataRows}} 
+    <div class="row">
+    {{> employeePic}}
+	</div>
+    <hr style="border:thick solid black"/>
+  {{/each}}
+
+</template>
+
+
+
+<template name="employeePic">
+	{{#each row}}
+  	<div class="col-md-3">
+		<h2 style="visibility:{{visibility}}">{{firstname}} {{lastname}}</h2>
+		<h3>{{title}}</h3>
+	<a href="http://www.brandeis.edu/facultyguide/person.html?emplid={{emplid}}">
+		<img src="{{image_url}}" width="100%"
+		     data-toggle="tooltip" data-placement="top" title="{{firstname}} {{lastname}}"
+		     alt="{{firstname}} {{lastname}}">
+	</a>
+		<h3>{{building}}</h3>
+	</div>
+	{{/each}}
+</template>
