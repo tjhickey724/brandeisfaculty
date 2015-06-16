@@ -1,0 +1,20 @@
+<template name="facList">
+	<button id="reloadFD">Reload Faculty Data</button>
+	<div id="facList">
+		<table class="table table-striped">
+			<tbody>
+				{{#each facdata}}
+				{{> facListing}}
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>
+
+<template name="facListing">
+<tr>
+	<td><a href="{{pathFor 'profile'}}">{{firstname}} {{lastname}}</a></td>
+	<td><ul>{{#each depts}}<li>{{descr}}</li> {{/each}}</ul></td>
+	
+</tr>
+</template>

@@ -1,0 +1,26 @@
+<template name="aggregate">
+<h1>JSON FacData example</h1>
+<a href="{{pathFor 'jsonexample'}}">Here</a> is an example of one document in the FacData collection
+<h1>Selection using find()</h1>
+Lets first do some work with find and use "count()" to aggregate.
+<ul>
+	<li> The total number of faculty is {{facCount}}</li>
+	<li> The number of faculty in just one department is {{facOneDept 1}}</li>
+	<li> The number of faculty in two departments is {{facOneDept 2}}</li>
+	<li> The number of faculty in three departments is {{facOneDept 3}}</li>
+	<li> The number of faculty in four departments is {{facOneDept 4}}</li>
+	<li> The number of faculty in five departments is {{facOneDept 5}}</li>
+	<li> The number of faculty in six departments is {{facOneDept 6}}</li>
+	<li> The number of faculty in the Computer Science Department is {{numFac 'Computer Science'}}</li>
+	<li> The CS faculty consists of
+		<ol>
+			{{#each deptFac 'Computer Science'}}
+				<li>{{firstname}} {{lastname}}</li>
+			{{/each}}
+		</ol>
+	</li>
+
+</ul>
+
+
+</template>

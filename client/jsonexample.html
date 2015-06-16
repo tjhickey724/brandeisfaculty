@@ -1,0 +1,348 @@
+<template name="jsonexample">
+<h1> This is a demo of the mongo aggregation methods</h1>
+<p>We use the FacData collection as our test set to do various kinds of aggregation</p>
+Here is an example of one document in the FacData collection
+<pre><code>
+	{
+		"disclaimer" : "The data this application is based on derive from Brandeis University, however the University makes no claim or representation as to the accuracy of the data as presented by this application.",
+		"readme" : "http://apps.brandeis.edu/facguide-api-readme",
+		"uid" : "tjhickey",
+		"middlename" : null,
+		"firstname" : "Tim",
+		"depts" : [
+			{
+				"deptid" : "16600",
+				"descr" : "Computer Science"
+			},
+			{
+				"deptid" : "25900",
+				"descr" : "Film, Television and Interactive Media"
+			},
+			{
+				"deptid" : "25200",
+				"descr" : "Volen National Center for Complex Systems"
+			}
+		],
+		"image_url" : "http://apps.brandeis.edu/facultyguide/images/7/F1942BC8B64F052A1B165631157D78A1F58485A.jpg",
+		"webpage_url" : "http://www.cs.brandeis.edu/~tim",
+		"telephonenumber" : "781-736-2706",
+		"publications" : [
+			{
+				"display_text" : "Hickey, Timothy J; Tarimo, William. \"The Affective Tutor.\" <U>The Journal of Computing in Small Colleges</U>  29. 6 (2014): 50-56.",
+				"release_date" : "2014-04-01",
+				"year_from" : "2014",
+				"publication_number" : "20",
+				"pub_url" : null,
+				"publication_abstract" : null,
+				"publication_title" : "The Affective Tutor"
+			},
+			{
+				"pub_url" : null,
+				"publication_abstract" : null,
+				"publication_title" : "The Entrepreneur’s Bootcamp: A New Model For Teaching Web/Mobile Development and Software Entrepreneurship",
+				"display_text" : "Hickey, Timothy J and Salas, Pito. <U>The Entrepreneur’s Bootcamp: A New Model For Teaching Web/Mobile Development and Software Entrepreneurship</U>. Proc. of \", The 44th ACM Technical Symposium on Computer Science Education, <U>SIGCSE13</U>  Denver, Colorado, USA: ACM, 2013.",
+				"release_date" : "2013-04-01",
+				"year_from" : "2013",
+				"publication_number" : "19"
+			},
+			{
+				"publication_title" : "Physics-based 3D Game Design as a First Course in Computing",
+				"publication_abstract" : null,
+				"pub_url" : null,
+				"publication_number" : "18",
+				"year_from" : "2013",
+				"release_date" : "2013-04-01",
+				"display_text" : "Hickey, Timothy J. \"Physics-based 3D Game Design as a First Course in Computing.\" <U>the Journal of Computing Sciences in Colleges</U>  28. 8 (2013): 35-41."
+			},
+			{
+				"publication_abstract" : null,
+				"publication_title" : "CollabEd: a Platform for Collaboratizing Existing Editors",
+				"pub_url" : null,
+				"year_from" : "2009",
+				"publication_number" : "17",
+				"display_text" : "Granville, Kenroy and Hickey, Timothy J. \"CollabEd: a Platform for Collaboratizing Existing Editors.\" International Conference on Mobile, Hybrid, and On-line Learning, Cancun, Mexico. IEEE, Feb 1-7, 2009.",
+				"release_date" : "2009-04-01"
+			},
+			{
+				"pub_url" : null,
+				"publication_title" : "Visualization and Interactive Exploration of High Dimensional Datasets",
+				"publication_abstract" : null,
+				"release_date" : "2008-04-01",
+				"display_text" : "Langton, John and Gifford, Elizabeth and Hickey, Timothy. \"Visualization and Interactive Exploration of High Dimensional Datasets.\" <U>Applications of Computational Intelligence in Biology: Current Trends and Open Problems</U>. vol. 122 Ed. Smolinski, Tomasz G.; Milanova, Mariofanna G.; Hassanien, Aboul-Ella. Springer, 2008. pp 231-255.",
+				"publication_number" : "16",
+				"year_from" : "2008"
+			},
+			{
+				"pub_url" : null,
+				"publication_title" : "Leveraging Layout with dimensional stacking and pixelization to facilitate feature discovery and directed queries",
+				"publication_abstract" : null,
+				"release_date" : "2007-04-01",
+				"display_text" : "John T. Langton, Astrid A Prinz, David K Wittenberg and Timothy J. Hickey. \"Leveraging Layout with dimensional stacking and pixelization to facilitate feature discovery and directed queries.\" Visual Information Expert Workshop (VIEW2006), Paris, France. 2006.",
+				"publication_number" : "10",
+				"year_from" : "2007"
+			},
+			{
+				"release_date" : "2007-04-01",
+				"display_text" : "John T. Langton, Astrid A. Prinz, and Timothy J. Hickey. \"NeuroVis: combining dimensional stacking and pixelization to visually expore, analyze, and mine multidimensional multivariate data.\" SPIE/VDA 2007, 2007.",
+				"publication_number" : "11",
+				"year_from" : "2007",
+				"pub_url" : null,
+				"publication_title" : "NeuroVis: combining dimensional stacking and pixelization to visually expore, analyze, and mine multidimensional multivariate data",
+				"publication_abstract" : null
+			},
+			{
+				"release_date" : "2006-04-01",
+				"display_text" : "Hickey, Timothy J and Taylor, Adam  and Prinz, Astrid and Marder, Eve. \"Structure and visualization of high dimensional conductance spaces.\" <U>Journal of Neurophysiology</U> 96. (2006): 891-905.",
+				"publication_number" : "8",
+				"year_from" : "2006",
+				"pub_url" : null,
+				"publication_title" : "Structure and visualization of high dimensional conductance spaces",
+				"publication_abstract" : null
+			},
+			{
+				"display_text" : "Langton, J.T. and Prinz, A and Hickey, Timothy J. \"Combining Pixelization and Dimensional Stacking.\" 2nd International Symposium on Visual Computing (ISVC 2006), Springer, 2006.",
+				"release_date" : "2006-04-01",
+				"year_from" : "2006",
+				"publication_number" : "9",
+				"pub_url" : null,
+				"publication_abstract" : null,
+				"publication_title" : "Combining Pixelization and Dimensional Stacking"
+			},
+			{
+				"pub_url" : null,
+				"publication_abstract" : null,
+				"publication_title" : "The Design, Implementation, and Application of the GrewpEdit Tool",
+				"display_text" : "Kenroy Granville and TImothy J Hickey. \"The Design, Implementation, and Application of the GrewpEdit Tool.\" The Richard Tapia Celebration of Diversity in Computing Conference, 2005, Albuquerque, NM. 10/2005.",
+				"release_date" : "2005-04-01",
+				"year_from" : "2005",
+				"publication_number" : "12"
+			},
+			{
+				"pub_url" : null,
+				"publication_abstract" : null,
+				"publication_title" : "Collaborative Learning: Collaborative Depth",
+				"display_text" : "Svetlena Taneva, Richard Alterman, Timothy Hickey. \"Collaborative Learning: Collaborative Depth.\" The XXVII Annual Conference of the Cognitive Science Society (CogSci2005), Stresa, Italy. 7/21/2005.",
+				"release_date" : "2005-04-01",
+				"year_from" : "2005",
+				"publication_number" : "13"
+			},
+			{
+				"pub_url" : null,
+				"publication_abstract" : null,
+				"publication_title" : "A Scheme-Based Web Programming Approach to Computer Literacy",
+				"display_text" : "Hickey, Timothy J. \"A Scheme-Based Web Programming Approach to Computer Literacy.\" <U>Journal of Functional Programming</U> (2004).",
+				"release_date" : "2004-04-01",
+				"year_from" : "2004",
+				"publication_number" : "3"
+			},
+			{
+				"pub_url" : null,
+				"publication_abstract" : null,
+				"publication_title" : "Groupware",
+				"display_text" : "Hickey, Timothy J. \"Groupware.\" <U>The Encyclopedia of Human Computer Interaction</U>., 2004",
+				"release_date" : "2004-04-01",
+				"year_from" : "2004",
+				"publication_number" : "4"
+			},
+			{
+				"year_from" : "2004",
+				"publication_number" : "5",
+				"display_text" : "Hickey, Timothy J. <U>Enhancing CS Programming Lab Courses Using Collaborative Editors</U>. CCSCE04, 2004.",
+				"release_date" : "2004-04-01",
+				"publication_abstract" : null,
+				"publication_title" : "Enhancing CS Programming Lab Courses Using Collaborative Editors",
+				"pub_url" : null
+			},
+			{
+				"publication_abstract" : null,
+				"publication_title" : "Integrating Tools and Resources: A Case Study in Building Educational Groupware for Collaborative Programming",
+				"pub_url" : null,
+				"year_from" : "2004",
+				"publication_number" : "6",
+				"display_text" : "Hickey, Timothy J. <U>Integrating Tools and Resources: A Case Study in Building Educational Groupware for Collaborative Programming</U>. CCSCNE04, 2004.",
+				"release_date" : "2004-04-01"
+			},
+			{
+				"release_date" : "2004-01-01",
+				"display_text" : "Hickey, Timothy J. <U>Rigorous Modeling of Hybrid Systems using Interval Arithmetic Constraints</U>. HSCC04, 2004.",
+				"publication_number" : "2",
+				"year_from" : "2004",
+				"pub_url" : null,
+				"publication_title" : "Rigorous Modeling of Hybrid Systems using Interval Arithmetic Constraints",
+				"publication_abstract" : null
+			},
+			{
+				"year_from" : "2004",
+				"publication_number" : "7",
+				"display_text" : "Hickey, Timothy J. <U>Using Analytic CLP to Model and Analyze Hybrid Systems</U>. FLAIRS 2004, 2004.",
+				"release_date" : "2004-04-01",
+				"publication_abstract" : null,
+				"publication_title" : "Using Analytic CLP to Model and Analyze Hybrid Systems",
+				"pub_url" : null
+			},
+			{
+				"publication_title" : "Scheme-based Web Programming as a Basis for a CS0 Curriculum",
+				"publication_abstract" : null,
+				"pub_url" : null,
+				"publication_number" : "1",
+				"year_from" : "2004",
+				"release_date" : "2004-01-01",
+				"display_text" : "Hickey,Timothy J. <U>Scheme-based Web Programming as a Basis for a CS0 Curriculum</U>. SIGCSE04, ACM Press, 2004."
+			},
+			{
+				"publication_abstract" : null,
+				"publication_title" : "Interval Arithmetic: from Principles to Implementation",
+				"pub_url" : null,
+				"year_from" : "2001",
+				"publication_number" : "14",
+				"display_text" : "Timothy J Hickey, Qun Ju, Maarten van Emden. \"Interval Arithmetic: from Principles to Implementation.\" <U>Journal of the ACM</U> 48. 5 (2001): 1038-1068.",
+				"release_date" : "2001-04-01"
+			},
+			{
+				"release_date" : "2001-04-01",
+				"display_text" : "Timothy J Hickey. \"Metalevel Interval Arithmetic and Verifiable Constraint Solving.\" <U>Journal of Functional and Logic Programming</U> 2001. 7 (2001).",
+				"publication_number" : "15",
+				"year_from" : "2001",
+				"pub_url" : null,
+				"publication_title" : "Metalevel Interval Arithmetic and Verifiable Constraint Solving",
+				"publication_abstract" : null
+			}
+		],
+		"title" : "Professor of Computer Science",
+		"building" : "Volen National Center for Complex Systems",
+		"lastname" : "Hickey",
+		"emplid" : "cf77fc02c3092393af1c05ae7032ca15f62851ca",
+		"office" : "138",
+		"expertise" : "Educational Technology, Computer Science Education, 3D Game Design, Interval Arithmetic, Scientific Visualization, Computer Supported Learning, Groupware and Collaborative Editing, Constraint Logic Programming",
+		"google_group" : "ltspublicapianddata-group@brandeis.edu",
+		"email" : "tjhickey@brandeis.edu",
+		"courses" : [
+			{
+				"subject" : "COSI",
+				"catalog_number" : "  11a",
+				"descr" : "Programming in Java and C"
+			},
+			{
+				"subject" : "COSI",
+				"descr" : "Advanced Programming Techniques",
+				"catalog_number" : "  12b"
+			},
+			{
+				"subject" : "COSI",
+				"catalog_number" : "  65a",
+				"descr" : "Introduction to 3-D Animation"
+			},
+			{
+				"catalog_number" : "  89aj",
+				"descr" : "Research Internship",
+				"subject" : "COSI"
+			},
+			{
+				"catalog_number" : " 152aj",
+				"descr" : "Web Application Programming",
+				"subject" : "COSI"
+			},
+			{
+				"subject" : "COSI",
+				"catalog_number" : " 152bj",
+				"descr" : "Web App Development for Social Networks"
+			},
+			{
+				"catalog_number" : " 153aj",
+				"descr" : "Mobile Application Development",
+				"subject" : "COSI"
+			},
+			{
+				"subject" : "COSI",
+				"descr" : "Mobile Game Design",
+				"catalog_number" : " 153bj"
+			},
+			{
+				"descr" : "The JBS Incubator",
+				"catalog_number" : " 154aj",
+				"subject" : "COSI"
+			},
+			{
+				"subject" : "COSI",
+				"descr" : "Computer Graphics",
+				"catalog_number" : " 155b"
+			},
+			{
+				"subject" : "COSI",
+				"descr" : "Intro to Scientific Computing",
+				"catalog_number" : " 177a"
+			},
+			{
+				"subject" : "COSI",
+				"descr" : "IT Entrepreneurship Practicum I",
+				"catalog_number" : " 320a"
+			},
+			{
+				"catalog_number" : " 320b",
+				"descr" : "IT Entrepreneurship Practicum II",
+				"subject" : "COSI"
+			},
+			{
+				"subject" : "EL",
+				"catalog_number" : "  94a",
+				"descr" : "Experiential Learning Practicum"
+			}
+		],
+		"awards" : [
+			{
+				"descr" : "the Jeanette Lerman-Neubauer ’69 and Joseph Neubauer Prize for Excellence in Teaching and Mentoring.",
+				"end_year" : null,
+				"start_year" : "2012"
+			},
+			{
+				"descr" : "Award for Excellence in Teaching",
+				"start_year" : "1981",
+				"end_year" : null
+			},
+			{
+				"start_year" : "1978",
+				"end_year" : null,
+				"descr" : "Award for Excellence in Masters Orals"
+			},
+			{
+				"end_year" : "1981",
+				"start_year" : "1978",
+				"descr" : "NSF Graduate Fellowship"
+			},
+			{
+				"descr" : "Louis Dembitz Award for Academic Achievment",
+				"end_year" : null,
+				"start_year" : "1976"
+			}
+		],
+		"quote" : "Timothy Hickey is a Professor of Computer Science whose current work focuses on educational technology and game-based learning.",
+		"degrees" : [
+			{
+				"country" : "USA",
+				"accomp" : "Ph.D.",
+				"school" : "University of Chicago",
+				"year" : "1986",
+				"sort_order" : "1",
+				"descr" : "Doctor of Philosophy"
+			},
+			{
+				"descr" : "Master of Science",
+				"year" : "1978",
+				"sort_order" : "3",
+				"accomp" : "M.S.",
+				"school" : "University of Chicago",
+				"country" : "USA"
+			},
+			{
+				"country" : "USA",
+				"accomp" : "B.A.",
+				"school" : "Brandeis University",
+				"year" : "1977",
+				"sort_order" : "5",
+				"descr" : "Bachelor of Arts"
+			}
+		],
+		"_id" : "n7ttnFS5CFSRvrPmD"
+	}
+</code></pre>
+</template>

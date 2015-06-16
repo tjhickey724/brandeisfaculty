@@ -1,0 +1,12 @@
+<template name="profile">
+  	<div class="col-md-3">
+		<h2 style="visibility:{{visibility}}">{{firstname}} {{lastname}}</h2>
+		<h3>{{title}}</h3>
+	<a href="http://www.brandeis.edu/facultyguide/person.html?emplid={{emplid}}">
+		<img src="{{image_url}}" width="100%"
+		     data-toggle="tooltip" data-placement="top" title="{{firstname}} {{lastname}}"
+		     alt="{{firstname}} {{lastname}}">
+	</a>
+		<h3>{{building}}</h3>
+	</div>
+</template>
