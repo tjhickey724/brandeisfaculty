@@ -1,6 +1,7 @@
  Meteor.startup(function () {
 	  if (FacPages.find({}).count()==0) {
-		  loadFacultyData();
+		  Meteor.call("getFacData");
+		  //loadFacultyData();
 	  }
 	  //  Meteor.call("getFacPages","H");
 

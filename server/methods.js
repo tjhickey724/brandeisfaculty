@@ -14,6 +14,7 @@ Meteor.methods({
 		loadFacultyData();
 	}
 })
+var facCount=0;
 
 // load in all of the faculty pages for faculty whose last name begins with the specified "letter"
 function loadFacPages(letter){
@@ -39,7 +40,8 @@ function loadFacData(emplid){
 			if (err != null) console.log("err = "+err);
 			else {
 				var empldata = JSON.parse(data.content);
-				console.log(empldata.lastname);
+				console.log(empldata.lastname + ": "+facCount);
+				empldata.facCount = facCount++;
 				FacData.insert(empldata);
 			}
 		}
@@ -50,6 +52,8 @@ function loadFacultyData(){
 	console.log("loading data");
 	FacPages.remove({});
 	FacData.remove({});
+	facCount=0;
+	
 	abcs="abcdefghijklmnopqrstuvwyz";
 	for(var i=0;i<abcs.length; i++) 
 		loadFacPages(abcs[i]);

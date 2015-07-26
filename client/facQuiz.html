@@ -1,23 +1,43 @@
 <template name="facQuiz">
+	<h1>Brandeis Faculty Images</h1>
 	<div id="facList">
-		<button id="tryQuiz">Next Guess</button>
-		<hr/>
+		
+		<button id="tryQuiz" class="btn btn-warning btn-lg">Next</button>
+		<button id="show" class="btn btn-info btn-lg">Show Info</button>
+		<br>Test your knowledge of the Brandeis faculty!
+		<hr>
 		{{#with randGuess}}
 			{{> facGuess}}
 		{{/with}}
+		
+		
 	</div>
 </template>
 
 <template name="facGuess">
-  	<div class="col-md-3">
-		<h2 style="visibility:{{visibility}}">{{firstname}} {{lastname}}</h2>
-		<h3>{{title}}</h3>
-	<a href="http://www.brandeis.edu/facultyguide/person.html?emplid={{emplid}}">
-		<img src="{{image_url}}" width="100%"
-		     data-toggle="tooltip" data-placement="top" title="{{firstname}} {{lastname}}"
-		     alt="{{firstname}} {{lastname}}">
-	</a>
-		<h3>{{building}}</h3>
+
+	<div class="row">
+
+		<div class="col-md-6 bg-info">
+			
+			<a href="http://www.brandeis.edu/facultyguide/person.html?emplid={{emplid}}">
+				<img src="{{image_url}}" height="400"
+				     data-toggle="tooltip" data-placement="top" title="{{firstname}} {{lastname}}"
+				     alt="{{firstname}} {{lastname}}">
+			</a>
+		</div>
+		<div class="col-md-6">
+
+			<h1><span style="visibility:{{visibility}}">{{firstname}} {{lastname}}</span></h1>
+			<h4>{{title}}</h4>
+			
+			<h4>Affiliation</h4>
+			<ul>{{#each depts}}<li>{{descr}}</li> {{/each}}</ul>
+			<h4>Courses taught</h4>
+			<ul>{{#each courses}}<li>{{subject}} {{catalog_number}} - {{descr}}</li>{{/each}}</ul>
+			<h4>Office: {{building}}</h4>
+			
+		</div>
 	</div>
 </template>
 
