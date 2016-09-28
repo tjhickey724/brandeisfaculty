@@ -3,8 +3,8 @@
 	<div id="facList">
 		<table class="table table-striped">
 			<tbody>
-				{{#each facdata}}
-				{{> facListing}}
+				{{#each row in facdata}}
+				{{> facListing fac=row}}
 				{{/each}}
 			</tbody>
 		</table>
@@ -12,8 +12,8 @@
 <hr>
 	<div>
 		<ol>
-		{{#each facdata}}
-		<li>{{firstname}} {{lastname}} </li>
+		{{#each fac in facdata}}
+		<li>{{fac.firstname}} {{fac.lastname}} </li>
 		{{/each}}
 		</ol>
 	</div>
@@ -21,8 +21,8 @@
 
 <template name="facListing">
 <tr>
-	<td><a href="{{pathFor 'profile'}}">{{firstname}} {{lastname}}</a></td>
-	<td><ul>{{#each depts}}<li>{{descr}}</li> {{/each}}</ul></td>
+	<td><a href="{{pathFor 'profile'}}">{{fac.firstname}} {{fac.lastname}}</a></td>
+	<td><ul>{{#each d in fac.depts}}<li>{{d.descr}}</li> {{/each}}</ul></td>
 	
 </tr>
 </template>
